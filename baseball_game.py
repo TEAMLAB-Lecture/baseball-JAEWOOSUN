@@ -310,6 +310,10 @@ def main():
         while flag==0:
             user_input = input("Input guess number : ")
 
+            if user_input =="0":
+                flag = -1
+                break
+
             if not is_validated_number(user_input):
                 print("Wrong Input, Input again")
                 continue
