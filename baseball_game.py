@@ -88,7 +88,7 @@ def is_duplicated_number(three_digit):
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
 
     check = {x for x in three_digit}
-    result = True if len(check) == 3 else False
+    result = False if len(check) == 3 else True
     # ==================================
     return result
 
@@ -118,7 +118,7 @@ def is_validated_number(user_input_number):
     if (
         is_digit(user_input_number)
         and is_between_100_and_999(user_input_number)
-        and is_duplicated_number(user_input_number)
+        and not is_duplicated_number(user_input_number)
     ):
         result = True
     else:
@@ -151,7 +151,7 @@ def get_not_duplicated_three_digit_number():
 
     while True:
         result = get_random_number()
-        if is_duplicated_number(str(result)):
+        if not is_duplicated_number(str(result)):
             return result
     # ==================================
     return result
@@ -198,9 +198,17 @@ def get_strikes_or_ball(user_input_number: str, random_number: str) -> list:
     ball = 0
     user_input_number_sorted = sorted(user_input_number_rest)
     random_number_sorted = sorted(random_number_rest)
-    for i in range(0,len(user_input_number_sorted)):
-        if user_input_number_sorted[i] == random_number_sorted[i]:
+    a=0
+    b=0
+    while a < len(user_input_number_sorted) and b < len(random_number_sorted):
+        if user_input_number_sorted[a] == random_number_sorted[b]:
             ball += 1
+            a+=1
+            b+=1
+        elif user_input_number_sorted[a] > random_number_sorted[b]:
+            b+=1
+        else:
+            a+=1
 
     result = [strikes, ball]
     # ==================================
